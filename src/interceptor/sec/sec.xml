@@ -12,7 +12,7 @@
 		    </interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="secStack"/>
-		<!-- È«¾Ö½á¹û£¬ËùÓÐµÄaction¶¼¿ÉÊ¹ÓÃ -->
+		<!-- È«ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½actionï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ -->
 		<global-results>
 			<result name="login">/login_s2.jsp</result>
 		</global-results>		
