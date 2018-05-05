@@ -1,32 +1,28 @@
-params用来把文本框的值赋值给action
- <interceptor name="assignDate" class="interceptor.AssignDateInterceptor"/>
-  <interceptor-stack name="selfStack"> 
-    <interceptor-ref name="assignDate"/>
-    <interceptor-ref name="params"/>
-  </interceptor-stack>
-  
-  <action name="myActionWithStack" class="controller.MyAction">
-      <interceptor-ref name="selfStack"/>      
-      <result>/interceptor_suc.jsp</result>
-  </action>
-  
-  安全检查拦截器
-   Map session=arg.getInvocationContext().getSession();
-    Object obj=session.get("username");
-    //<result name="login">..</result>
-    if(obj==null) return "login";
-    else return arg.invoke();
-	
-	<interceptors>
-			<interceptor name="secCheck" class="interceptor.sec.SecInterceptor" />
-		</interceptors>
-		<global-results>
-			<result name="login">/login_s2.jsp</result>
-		</global-results>
-		
-		<exception-mapping 
-		exception=""要处理哪一种异常，类名
-		result=""/>
-		
-		r  endsWith
-		
+多文件,数组或List
+File[] 文本框名字
+String[] 文本框名字ContentType;
+String[] 文本框名字FileName;
+
+---
+通过action下载
+   <result type="stream">
+      <!--  public InputStream getTxtStream() -->
+         <param name="inputName">txtStream</param>
+      </result>
+	  
+	   <s:url var="complexDownUrl" action="complexFileDown">
+   <s:param name="contentType" value="uploadContentType"/>
+   <s:param name="fileName" value="uploadFileName"/>
+   <s:param name="path" value="uploadPath"/>
+ </s:url>
+ <a href="${complexDownUrl}">复杂参数文件下载</a>
+ <action name="complexFileDown" class="controller.FileDown">
+			<result name="success" type="stream">
+				<param name="contentType">${contentType}</param>
+				<param name="inputName">fileStream</param>
+				<param name="contentDisposition">attachment;filename="${cnFileName}"</param>				
+			</result>
+		</action>
+
+文件名有乱码
+new String(fileName.getBytes(),"iso-8859-1")

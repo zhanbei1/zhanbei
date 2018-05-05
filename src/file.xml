@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<package name="file" extends="struts-default">
+		<action name="fileUpload" class="controller.FileUpload">
+			<result>/upload_res.jsp</result>
+			<result name="input">/upload.jsp</result>
+		</action>
+		<action name="fileUploadLimitSize" class="controller.FileUpload">
+			<result>/upload_res.jsp</result>
+			<result name="input">/upload.jsp</result>
+			<interceptor-ref name="defaultStack">
+			  <param name="fileUpload.maximumSize">5000</param>
+			</interceptor-ref>
+		</action>
+		<action name="filesUpload" class="controller.FilesUpload">
+			<result>/upload_res.jsp</result>
+		</action>
+		<action name="fileDown" class="controller.FileDown">
+			<result type="stream">
+				<!-- public InputStream getTxtStream() -->
+				<param name="inputName">txtStream</param>
+			</result>
+		</action>
+		<action name="fileDown2" class="controller.FileDown">
+			<result type="stream">
+				<param name="inputName">fileStream</param>
+			</result>
+		</action>
+		<action name="complexFileDown" class="controller.FileDown">
+			<result name="success" type="stream">
+				<param name="contentType">${contentType}</param>
+				<param name="inputName">fileStream</param>
+				<param name="contentDisposition">attachment;filename="${cnFileName}"</param>				
+			</result>
+		</action>
+
+
+	</package>
+
+</struts>
